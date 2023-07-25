@@ -85,7 +85,9 @@ India                             South Asia                                    
 It is evident from the data that the world’s forest cover is dwindling,Most notably however, only two regions had a decrease in forest cover. There needs to be a deeper dive into these regions to determine what practices need to be stopped or changed to reduce deforestation in these areas and consequently in the whole world.
 ● Which countries should we focus on over others?
 The countries of interest are mainly Nigeria, St. Martin, Togo , Uganda and Mauritania as they have the highest rate of deforestation.
+
 APPENDIX: SQL Queries Used
+
 1.
 DROP VIEW IF EXISTS Forestation;
 CREATE VIEW forestation AS
@@ -98,15 +100,32 @@ ON f.country_code=l.country_code
 AND f.year=l.year
 INNER JOIN regions AS r
 ON f.country_code=r.country_code
-);
-2.
+
+1.
 SELECT forest_area_sqkm
 FROM Forestation
 WHERE year=1990 AND region='World';
-3.
+
+2.
 SELECT forest_area_sqkm
 FROM Forestation
 WHERE year=2016 AND region='World';
+
+3.
+WITH forest_area_sqkm AS
+(
+SELECT Year, forest_area_sqkm
+FROM forestation
+WHERE Year IN (1990, 2016)
+)
+SELECT
+(MAX(CASE WHEN Year = 1990 THEN forest_area_sqkm END)-MAX(CASE WHEN Year =
+2016 THEN forest_area_sqkm END)) AS loss,
+((MAX(CASE WHEN Year = 1990 THEN forest_area_sqkm END) - MAX(CASE WHEN Year =
+2016 THEN forest_area_sqkm END)) / MAX(CASE WHEN Year = 1990 THEN
+forest_area_sqkm END)) * 100 AS percent_loss
+FROM forestation;
+
 4.
 WITH forest_area_sqkm AS
 (
@@ -121,32 +140,22 @@ SELECT
 2016 THEN forest_area_sqkm END)) / MAX(CASE WHEN Year = 1990 THEN
 forest_area_sqkm END)) * 100 AS percent_loss
 FROM forestation;
+
 5.
-WITH forest_area_sqkm AS
-(
-SELECT Year, forest_area_sqkm
-FROM forestation
-WHERE Year IN (1990, 2016)
-)
-SELECT
-(MAX(CASE WHEN Year = 1990 THEN forest_area_sqkm END)-MAX(CASE WHEN Year =
-2016 THEN forest_area_sqkm END)) AS loss,
-((MAX(CASE WHEN Year = 1990 THEN forest_area_sqkm END) - MAX(CASE WHEN Year =
-2016 THEN forest_area_sqkm END)) / MAX(CASE WHEN Year = 1990 THEN
-forest_area_sqkm END)) * 100 AS percent_loss
-FROM forestation;
-6.
 SELECT country_name, total_area_sqkm
 FROM forestation
 WHERE year=2016 AND total_area_sqkm<1324449
 ORDER BY total_area_sqkm DESC;
-7.
+
+6.
 SELECT country_name,
 ROUND(total_area_sqkm::NUMERIC,2) AS total_area_2016
 FROM forestation
 WHERE year=2016 AND total_area_sqkm<1324449
 ORDER BY total_area_sqkm DESC;
+
 REGIONAL OUTLOOK
+
 1.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_2016
@@ -154,6 +163,7 @@ FROM forestation
 WHERE year=2016 and region='World'
 GROUP BY 1
 ORDER BY 2;
+
 2.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_2016
@@ -162,6 +172,7 @@ WHERE year=2016
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 1;
+
 3.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_2016
@@ -170,6 +181,7 @@ WHERE year=2016
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 1;
+
 4.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_2016
@@ -178,6 +190,7 @@ WHERE year=2016
 GROUP BY 1
 ORDER BY 2
 LIMIT 1;
+
 5.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_2016
@@ -186,6 +199,7 @@ WHERE year=2016
 GROUP BY 1
 ORDER BY 2
 LIMIT 1;
+
 6.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_1990
@@ -193,6 +207,7 @@ FROM forestation
 WHERE year=1990 and region='World'
 GROUP BY 1
 ORDER BY 2;
+
 7.
 SELECT region,
 (sum(forest_area_sqkm)*100)/sum(total_area_sqkm) as Pct_fa_1990
@@ -201,7 +216,8 @@ WHERE year=1990
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 1;
-8. , 9., 10., 11., 12., 13., 14., 15.
+
+9. , 9., 10., 11., 12., 13., 14., 15.
 WITH forest_area_by_region AS
 (
 SELECT
@@ -222,8 +238,10 @@ region,pctfa_1990,pctfa_2016,
 ROUND((pctfa_1990 - pctfa_2016)::numeric,2) AS pct_change
 FROM forest_area_by_region
 WHERE pctfa_1990 > 0 AND pctfa_2016 < pctfa_1990;
+
 COUNTRY-LEVEL DETAIL
 SUCCESS STORIES
+
 1.
 WITH forest_area_by_country AS (
 SELECT
@@ -245,7 +263,8 @@ WHERE
 fa_1990 > 0
 AND fa_1990 <fa_2016
 ORDER BY Fa_growth DESC
-1.
+
+2.
 WITH forest_area_by_country AS
 (
 SELECT
@@ -265,8 +284,11 @@ FROM forest_area_by_country
 WHERE fa_1990 > 0 AND fa_1990 <fa_2016
 ORDER BY Fa_growth DESC
 LIMIT 1;
+
 LARGEST CONCERNS
+
 1. Sqkm decrease
+   
 WITH forest_area_by_country AS (
 SELECT
 country_name,region,
@@ -288,7 +310,9 @@ fa_1990 > 0
 AND fa_1990 >fa_2016
 ORDER BY Absolute_fa_change
 LIMIT 6;
-2. Percentage decrease
+
+3. Percentage decrease
+   
 WITH forest_area_by_country AS
 (
 SELECT
@@ -308,8 +332,9 @@ WHERE fa_1990 > 0
 AND fa_1990 >fa_2016
 ORDER BY Absolute_fa_change
 LIMIT 5;
+
 QUARTILES
-1.
+
 WITH fa_pct AS
 (
 SELECT country_name,region,year,(FOREST_AREA_SQKM/TOTAL_AREA_SQKM)*100 AS
@@ -333,6 +358,7 @@ FROM
 quart_range
 GROUP BY 1
 ORDER BY 2 DESC
+
 2.
 WITH fa_pct AS
 (
