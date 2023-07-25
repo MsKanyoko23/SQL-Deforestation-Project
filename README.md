@@ -6,6 +6,7 @@ The following is a report I created to answer several of these questions by quer
 The index for all the SQL querries used is provided below the report.
 
 1. GLOBAL SITUATION
+   
 According to the World Bank, the total forest area of the world was 41,282,694.9 in 1990. As
 of 2016, the most recent year for which data was available, that number had fallen to
 39,958,245.9, a loss of 1,324,449, or 3.21%.
@@ -13,6 +14,7 @@ The forest area lost over this time period is slightly more than the entire land
 listed for the year 2016 (which is 1279999.99).
 
 2. REGIONAL OUTLOOK
+   
 In 2016, the percent of the total land area of the world designated as forest was 31.38%. The
 region with the highest relative forestation was Latin America & caribbean, with 46.16%, and the
 region with the lowest relative forestation was Middle East & North Africa, with 2.07% forestation.
@@ -31,7 +33,9 @@ However, the drop in forest area in the two aforementioned regions was so large,
 forest area of the world decreased over this time period from 32.42% to 31.38%.
 
 3. COUNTRY-LEVEL DETAIL
+   
 A. SUCCESS STORIES
+
 There is one particularly bright spot in the data at the country level, China. This country actually
 increased in forest area from 1990 to 2016 by 527229.062. It would be interesting to study what
 has changed in this country over this time to drive this figure in the data higher. The country with
@@ -41,7 +45,9 @@ China and The United States are of course very large countries in total land are
 look at the largest percent change in forest area from 1990 to 2016, we aren’t surprised to find a
 much smaller country listed at the top.Iceland increased in forest area by 213.67% from 1990 to
 2016.
+
 B. LARGEST CONCERNS
+
 Which countries are seeing deforestation to the largest degree? We can answer this question in
 two ways. First, we can look at the absolute square kilometer decrease in forest area from 1990
 to 2016. The following 3 countries had the largest decrease in forest area over the time period
@@ -66,6 +72,7 @@ The 5th country on the list is St.Martin(French Part), which is in the Latin Ame
 From the above analysis, we see that Nigeria is the only country that ranks in the top 5 both in terms of absolute square kilometer decrease in forest as well as percent decrease in forest area from 1990 to 2016. Therefore, this country has a significant opportunity ahead to stop the decline and hopefully spearhead remedial efforts.
 
 C. QUARTILES
+
 Count of Countries Grouped by Forestation Percent Quartiles, 2016:
 Quartile                                       Number of Countries
 First                                                  85
@@ -81,6 +88,7 @@ British Virgin Islands            Latin America and Caribbean                   
 India                             South Asia                                          23.83
 
 4. RECOMMENDATIONS
+   
 ● What have you learned from the World Bank data?
 It is evident from the data that the world’s forest cover is dwindling,Most notably however, only two regions had a decrease in forest cover. There needs to be a deeper dive into these regions to determine what practices need to be stopped or changed to reduce deforestation in these areas and consequently in the whole world.
 ● Which countries should we focus on over others?
